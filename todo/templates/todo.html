@@ -1,0 +1,28 @@
+<h1>this is Simple page</h1>
+<!--<ul>
+    <li> temp todo item A</li>
+    <li> temp todo item B</li>
+</ul> -->
+<ul>
+    {% for todo_item in all%}
+    <li>{{ todo_item.content}}
+
+    </li>
+    {% endfor %}
+</ul>
+
+<form action="/addtodo/" method="POST">{% csrf_token %}
+    <input type="text" name="content"/>
+    <input type="submit" value="add">
+</form>
+
+<ul>
+    {% for todo_item in all%}
+    <li>{{ todo_item.content}}
+        <form action="/deletetodo/{{ todo_item.id}}/" 
+         style ="display:inline;" method="POST">{% csrf_token %}
+            <input type="submit" value="Delete">
+        </form>
+    </li>
+    {% endfor %}
+</ul>
